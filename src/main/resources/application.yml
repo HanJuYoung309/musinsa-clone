@@ -2,24 +2,26 @@ spring:
   datasource:
     url: jdbc:mysql://localhost:3306/musinsa?useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Seoul
     username: root
-    password: root
+    password:             # ? ?? ?????
+    driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
     hibernate:
-      ddl-auto: update   # ????? validate ??
+      ddl-auto: create        # ??? validate ??
     properties:
       hibernate:
         format_sql: true
-  jackson:
-    deserialization:
-      fail-on-unknown-properties: false
+    database-platform: org.hibernate.dialect.MySQLDialect  # URL ?? ? ? ?? ??? ??
+
+jackson:
+  deserialization:
+    fail-on-unknown-properties: false
 
 jwt:
   issuer: musinsa-lite
-  access-token-validity-seconds: 900      # 15?
-  refresh-token-validity-seconds: 604800  # 7?
+  access-token-validity-seconds: 900       # 15?
+  refresh-token-validity-seconds: 604800   # 7?
   secret: "change-this-to-a-256bit-secret-change-this-to-a-256bit-secret"
 
 logging:
   level:
     org.springframework.security: INFO
-
